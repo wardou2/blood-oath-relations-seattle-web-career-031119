@@ -13,4 +13,8 @@ class BloodOath
     @@all
   end
 
+  def self.first_oath
+    self.all[0].follower
+  end
+
 end
