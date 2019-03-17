@@ -19,11 +19,11 @@ follower10 = Follower.new(name: "lkj", age: 57, life_motto: "a")
 follower11 = Follower.new(name: "lkj", age: 57, life_motto: "a")
 
 
-cult1 = Cult.new(name: 'Kooolieeohohoh', location: "middle america", slogan: "we like poop", founding_year: 2013 )
-cult2 = Cult.new(name: 'cool cult2', location: 'nowhere', slogan: "ahhh help", founding_year: '2000')
-cult3 = Cult.new(name: 'cool cult3', location: 'nowhere', slogan: "ahhh help", founding_year: '2000')
-cult4 = Cult.new(name: 'cool cult4', location: 'nowhere', slogan: "ahhh help", founding_year: '2000')
-cult5 = Cult.new(name: 'cool cult5', location: 'nowhere', slogan: "ahhh help", founding_year: '2000')
+cult1 = Cult.new(name: 'Kooolieeohohoh', location: "middle america", slogan: "we like poop", founding_year: 2013, minimum_age: 18 )
+cult2 = Cult.new(name: 'cool cult2', location: 'nowhere', slogan: "ahhh help", founding_year: '2000', minimum_age: 18)
+cult3 = Cult.new(name: 'cool cult3', location: 'nowhere', slogan: "ahhh help", founding_year: '2000', minimum_age: 18)
+cult4 = Cult.new(name: 'cool cult4', location: 'nowhere', slogan: "ahhh help", founding_year: '2000', minimum_age: 18)
+cult5 = Cult.new(name: 'cool cult5', location: 'nowhere', slogan: "ahhh help", founding_year: '2000', minimum_age: 12)
 
 # cult1.recruit_follower(follower1)
 # cult1.recruit_follower(follower2)
@@ -32,7 +32,6 @@ cult5 = Cult.new(name: 'cool cult5', location: 'nowhere', slogan: "ahhh help", f
 follower1.join_cult(cult1)
 follower2.join_cult(cult2)
 follower2.join_cult(cult3)
-follower2.join_cult(cult2)
 follower3.join_cult(cult1)
 follower3.join_cult(cult2)
 follower4.join_cult(cult1)
@@ -45,7 +44,7 @@ follower10.join_cult(cult1)
 follower11.join_cult(cult1)
 
 
-somebloodoath = BloodOath.new(cult: cult1, follower: follower2, initiation_date: "02-02-1980")
+ #somebloodoath = BloodOath.new(cult: cult1, follower: follower2, initiation_date: "02-02-1980")
 
 # cult2.recruit_follower(follower2)
 # cult2.recruit_follower(follower3)

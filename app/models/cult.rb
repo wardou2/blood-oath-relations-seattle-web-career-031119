@@ -2,14 +2,16 @@ require "pry"
 
 class Cult
   @@all = []
-  attr_accessor :name, :location, :founding_year, :slogan
+  attr_reader :name, :location, :founding_year, :slogan, :minimum_age
 
-  def initialize(name:, location:, founding_year:, slogan:)
+  def initialize(name:, location:, founding_year:, slogan:, minimum_age:)
     @name = name
     @location = location
     @founding_year = founding_year.to_i
     @slogan = slogan
     @@all << self
+    @minimum_age = minimum_age.to_i
+
   end
 
   def self.all
@@ -17,17 +19,25 @@ class Cult
   end
 
   def recruit_follower(follower)
-    current_day = Time.new
-    formatted_time = "#{current_day.year}-#{current_day.month}-#{current_day.day}"
-    BloodOath.new(cult: self, follower: follower, initiation_date: formatted_time)
+    if follower.age >= minimum_age
+      current_day = Time.new
+      formatted_time = "#{current_day.year}-#{current_day.month}-#{current_day.day}"
+      BloodOath.new(cult: self, follower: follower, initiation_date: formatted_time)
+    else
+      puts "Yer too young feller."
+    end
   end
 
   def bloodoaths
     BloodOath.all.select {|bloodoath| bloodoath.cult == self}
   end
 
+  def followers
+    bloodoaths.collect {|bloodoath| bloodoath.follower}
+  end
+
   def cult_population
-    bloodoaths.count
+    followers.count
   end
 
   def self.find_by_name(search_name)
@@ -43,12 +53,12 @@ class Cult
   end
 
   def average_age
-    age_array = bloodoaths.collect {|bloodoath| bloodoath.follower.age}
+    age_array = followers.collect {|follower| follower.age}
     (age_array.inject {|sum, age| sum + age}.to_f / cult_population).round(2)
   end
 
   def my_followers_mottos
-    bloodoaths.each {|bloodoath| puts bloodoath.follower.life_motto}
+    followers.each {|follower| puts follower.life_motto}
   end
 
   def self.least_popular

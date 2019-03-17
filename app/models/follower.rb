@@ -1,5 +1,5 @@
 class Follower
-  attr_accessor :name, :age, :life_motto
+  attr_reader :name, :age, :life_motto
   @@all = []
 
   def initialize(name:, age:, life_motto:)
@@ -14,9 +14,13 @@ class Follower
   end
 
   def join_cult(cult)
-    current_day = Time.new
-    formatted_time = "#{current_day.year}-#{current_day.month}-#{current_day.day}"
-    BloodOath.new(cult: cult, follower: self, initiation_date: formatted_time)
+    if age >= cult.minimum_age
+      current_day = Time.new
+      formatted_time = "#{current_day.year}-#{current_day.month}-#{current_day.day}"
+      BloodOath.new(cult: cult, follower: self, initiation_date: formatted_time)
+    else
+      puts "Yer too young dammit!"
+    end
   end
 
   def cults
@@ -48,6 +52,12 @@ class Follower
     else
       return_arr
     end
+  end
+
+  def fellow_cult_members
+    fellow_members = cults.collect {|cult| cult.followers}.flatten.uniq
+    fellow_members.delete(self)
+    fellow_members
   end
 
 end
